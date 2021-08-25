@@ -17,6 +17,9 @@
         <ul class="nav navbar-nav flex-row float-right">
           {% if session['user_id'] %}
           <li class="nav-item">
+            <a class="nav-link pr-3 text-light" href="/messages">Messages</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/logout">Logout</a>
           </li>
           {% else %}
@@ -28,9 +31,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/projects">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link pr-3 text-light" href="/messages">messages</a>
           </li>
           <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/login">Login</a>

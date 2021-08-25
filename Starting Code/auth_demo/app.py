@@ -22,38 +22,38 @@ def home_page():
     return render_template('index.html')
 
 
-@app.route('/artists', methods=['GET', 'POST'])
-def show_tweets():
+@app.route('/messages', methods=['GET', 'POST'])
+def show_messages():
     if "user_id" not in session:
         flash("Please login first!", "danger")
         return redirect('/')
-    form = TweetForm()
-    all_tweets = Tweet.query.all()
+    form = ArtistForm()
+    all_messages = message.query.all()
     if form.validate_on_submit():
         text = form.text.data
-        new_tweet = Tweet(text=text, user_id=session['user_id'])
-        db.session.add(new_tweet)
+        new_message = Message(text=text, user_id=session['user_id'])
+        db.session.add(new_message)
         db.session.commit()
         flash('Tweet Created!', 'success')
-        return redirect('/tweets')
+        return redirect('/messages')
 
-    return render_template("tweets.html", form=form, tweets=all_tweets)
+    return render_template("messages.html", form=form, messages=all_messages)
 
 
-@app.route('/tweets/<int:id>', methods=["POST"])
+@app.route('/messages/<int:id>', methods=["POST"])
 def delete_tweet(id):
-    """Delete tweet"""
+    """Delete message"""
     if 'user_id' not in session:
         flash("Please login first!", "danger")
         return redirect('/login')
-    tweet = Tweet.query.get_or_404(id)
-    if tweet.user_id == session['user_id']:
-        db.session.delete(tweet)
+    message = message.query.get_or_404(id)
+    if message.user_id == session['user_id']:
+        db.session.delete(message)
         db.session.commit()
         flash("Tweet deleted!", "info")
-        return redirect('/tweets')
+        return redirect('/messages')
     flash("You don't have permission to do that!", "danger")
-    return redirect('/tweets')
+    return redirect('/messages')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -72,7 +72,7 @@ def register_user():
             return render_template('register.html', form=form)
         session['user_id'] = new_user.id
         flash('Welcome! Successfully Created Your Account!', "success")
-        return redirect('/tweets')
+        return redirect('/messages')
 
     return render_template('register.html', form=form)
 
@@ -88,7 +88,7 @@ def login_user():
         if user:
             flash(f"Welcome Back, {user.username}!", "primary")
             session['user_id'] = user.id
-            return redirect('/tweets')
+            return redirect('/messages')
         else:
             form.username.errors = ['Invalid username/password.']
 
