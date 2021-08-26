@@ -5,7 +5,7 @@ from forms import UserForm, ArtistForm
 from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresl:///auth_demo"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresl:///simply_art"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = "abc123"

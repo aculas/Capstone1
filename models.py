@@ -29,9 +29,27 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
+    image_url = db.Column(db.String, nullable=False)
+
+    bio = db.Column(db.String, nullable=True)
+
     username = db.Column(db.Text, nullable=False,  unique=True)
 
     password = db.Column(db.Text, nullable=False)
+
+    location = db.Column(db.String, nullable=False)
+
+    website = db.Column(db.String, nullable=True)
+
+    genre = db.Column(db.String, nullable=True)
+
+    projects = db.Column(db.String, nullable=False)
+
+    messages = db.Column(db.String, nullable=False)
+
+    followers = db.Column(db.String, nullable=False)
+
+    following = db.Column(db.String, nullable=False)
 
     @classmethod
     def register(cls, username, pwd):
