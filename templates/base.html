@@ -8,12 +8,18 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css"
     />
+    <link rel="stylesheet" href="/static/stylesheets/style.css" />
   </head>
 
   <body>
     <nav class="navbar navbar-dark bg-dark justify-content-between">
-      <div class="container">
-        <a href="/" class="navbar-brand text-light">Simply Art</a>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand text-light">
+            <img src="/static/images/simply_art_logo.png" alt="logo" />
+            <span>Simply Art</span>
+          </a>
+        </div>
         <ul class="nav navbar-nav flex-row float-right">
           {% if session['user_id'] %}
           <li class="nav-item">

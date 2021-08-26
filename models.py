@@ -13,8 +13,26 @@ def connect_db(app):
     db.init_app(app)
 
 
+class Follows(db.Model):
+    """Connection of a follower <-> followed_user."""
+
+    __tablename__ = 'follows'
+
+    user_being_followed_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete="cascade"),
+        primary_key=True,
+    )
+
+    user_following_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete="cascade"),
+        primary_key=True,
+    )
+
+
 class Artist(db.Model):
-    __tablename__ = 'artist'
+    __tablename__ = 'artists'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     text = db.Column(db.Text, nullable=False)
@@ -29,29 +47,35 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    image_url = db.Column(db.String, nullable=False)
+    email = db.Column(db.Text, nullable=False, unique=True)
 
-    bio = db.Column(db.String, nullable=True)
+    image_url = db.Column(
+        db.Text, default="/static/images/default-pic.png", nullable=False)
+
+    bio = db.Column(db.Text,)
 
     username = db.Column(db.Text, nullable=False,  unique=True)
 
     password = db.Column(db.Text, nullable=False)
 
-    location = db.Column(db.String, nullable=False)
+    location = db.Column(db.Text,)
 
-    website = db.Column(db.String, nullable=True)
+    website = db.Column(db.Text, nullable=True)
 
     genre = db.Column(db.String, nullable=True)
 
     projects = db.Column(db.String, nullable=False)
 
-    messages = db.Column(db.String, nullable=False)
+    messages = db.relationship('Message')
 
-    followers = db.Column(db.String, nullable=False)
+    followers = db.relationship(
+        "User",
+        secondary="follows",
+        primaryjoin=(Follows.user_being_followed_id == id),
+        secondaryjoin=(Follows.user_following_id == id)
+    )
 
-    following = db.Column(db.String, nullable=False)
-
-    @classmethod
+    @ classmethod
     def register(cls, username, pwd):
         """Register user w/hashed password & return user."""
 
@@ -62,7 +86,7 @@ class User(db.Model):
         # return instance of user w/username and hashed pwd
         return cls(username=username, password=hashed_utf8)
 
-    @classmethod
+    @ classmethod
     def authenticate(cls, username, pwd):
         """Validate that user exists & password is correct.
 
