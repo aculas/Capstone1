@@ -4,6 +4,8 @@ from models import connect_db, db, User, Artist
 from forms import UserForm, ArtistForm
 from sqlalchemy.exc import IntegrityError
 
+import requests
+
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresl:///simply_art"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -11,6 +13,11 @@ app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = "abc123"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
+
+res = requests.get(
+    'https://api.unsplash.com/photos/random?client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
+
+data = res.json()
 
 connect_db(app)
 

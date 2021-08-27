@@ -152,6 +152,14 @@ nav + .container {
   margin-bottom: 1rem;
 }
 
+/* ===============================Main page image */
+
+#unsplashImage {
+  max-height: 500px;
+  border: 20px solid black;
+  transform: rotate(3deg);
+}
+
 /* ===================== User profile */
 
 .join-message {
