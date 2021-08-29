@@ -1,9 +1,11 @@
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
+from datetime import datetime
 
-db = SQLAlchemy()
+from flask_bcrypt import Bcrypt
+from flask_sqlalchemy import SQLAlchemy
+
 
 bcrypt = Bcrypt()
+db = SQLAlchemy()
 
 
 def connect_db(app):
@@ -100,3 +102,43 @@ class User(db.Model):
             return u
         else:
             return False
+
+
+class Message(db.Model):
+    """An individual message."""
+
+    __tablename__ = 'messages'
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+    )
+
+    text = db.Column(
+        db.String(140),
+        nullable=False,
+    )
+
+    timestamp = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow(),
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete='CASCADE'),
+        nullable=False,
+    )
+
+    user = db.relationship('User')
+
+
+def connect_db(app):
+    """Connect this database to provided Flask app.
+
+    You should call this in your Flask app.
+    """
+
+    db.app = app
+    db.init_app(app)
