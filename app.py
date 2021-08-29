@@ -33,6 +33,16 @@ data = res.json()
 connect_db(app)
 
 ##############################################################################
+# Discover page (searchbar for users)
+
+
+@app.route('/discover', methods=["GET", "POST"])
+def discover():
+    """Discover new artists(searchbar)."""
+
+    return render_template('discover.html')
+
+##############################################################################
 # User signup/login/logout
 
 
