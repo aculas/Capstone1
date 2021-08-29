@@ -268,7 +268,7 @@ def edit_profile():
             user.username = form.username.data
             user.email = form.email.data
             user.image_url = form.image_url.data or "/static/images/default-pic.png"
-            user.header_image_url = form.header_image_url.data or "/static/images/warbler-hero.jpg"
+            user.header_image_url = form.header_image_url.data or "/static/images/simply_art_logo.png"
             user.bio = form.bio.data
 
             db.session.commit()
@@ -383,11 +383,3 @@ def page_not_found(e):
     """404 NOT FOUND page."""
 
     return render_template('404.html'), 404
-
-
-##############################################################################
-# Turn off all caching in Flask
-#   (useful for dev; in production, this kind of stuff is typically
-#   handled elsewhere)
-#
-# https://stackoverflow.com/questions/34066804/disabling-caching-in-flask
