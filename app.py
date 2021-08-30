@@ -23,12 +23,6 @@ app.config["SECRET_KEY"] = "abc123"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 toolbar = DebugToolbarExtension(app)
 
-res = requests.get(
-    'https://api.unsplash.com/photos/random?client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
-
-response = json.loads(res.text)
-
-data = res.json()
 
 connect_db(app)
 
@@ -39,8 +33,26 @@ connect_db(app)
 @app.route('/discover', methods=["GET", "POST"])
 def discover():
     """Discover new artists(searchbar)."""
+    res = requests.get(
+        'https://api.unsplash.com/search/photos?query=green&client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
 
-    return render_template('discover.html')
+    data = res.json()
+
+    # alt_description: "green and yellow light illustration",
+
+    return render_template('discover.html', search_bar=data.get("results")[0].get("alt_description"))
+
+##############################################################################
+# Artists page (page of all artists)
+
+
+@app.route('/artists', methods=["GET", "POST"])
+def artists():
+    """Artists Bio oage."""
+    res = requests.get(
+        'https://api.unsplash.com/users/:username/portfolio&client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
+
+    return render_template('artists.html')
 
 ##############################################################################
 # User signup/login/logout
@@ -369,6 +381,12 @@ def homepage():
     - anon users: no messages
     - logged in: 100 most recent messages of followed_users
     """
+    res = requests.get(
+        'https://api.unsplash.com/photos/random?client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
+
+    # res = json.loads(res.text)
+
+    data = res.json()
 
     if g.user:
         following_ids = [f.id for f in g.user.following] + [g.user.id]
@@ -382,10 +400,10 @@ def homepage():
 
         liked_msg_ids = [msg.id for msg in g.user.likes]
 
-        return render_template('home.html', messages=messages, likes=liked_msg_ids)
+        return render_template('index.html', messages=messages, likes=liked_msg_ids, background=data.get("urls").get("full"))
 
     else:
-        return render_template('home-anon.html')
+        return render_template('index.html', background=data.get("urls").get("full"))
 
 
 @app.errorhandler(404)

@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="/static/stylesheets/style.css" />
   </head>
 
-  <body>
-    <nav class="navbar navbar-dark bg-dark justify-content-between">
+  <body class="{% block body_class %}{% endblock %}">
+    <nav class="navbar navbar-expand bg-dark">
       <div class="container-fluid">
         <div class="navbar-header">
           <a href="/" class="navbar-brand text-light">
@@ -20,7 +20,7 @@
             <span>Simply Art</span>
           </a>
         </div>
-        <ul class="nav navbar-nav flex-row float-right">
+        <ul class="nav navbar-nav navbar-right">
           {% if session['user_id'] %}
           <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/messages">Messages</a>
@@ -34,9 +34,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/artists">Artists</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link pr-3 text-light" href="/projects">Projects</a>
           </li>
           <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/login">Login</a>
