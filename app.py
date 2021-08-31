@@ -16,7 +16,7 @@ CURR_USER_KEY = "curr_user"
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    os.environ.get('DATABASE_URL', 'postgresl:///simply_art'))
+    os.environ.get('DATABASE_URL', 'postgresql:///simply_art'))
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = "abc123"

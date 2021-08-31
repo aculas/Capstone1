@@ -1,5 +1,8 @@
 /* ====================== General */
-
+.h1 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif font-size 24px font-weight bold;
+}
 body {
   background-color: #e6ecf0;
 }
@@ -13,7 +16,7 @@ body.error-404 {
 }
 
 .btn {
-  border-radius: 50px;
+  border-radius: 10px;
 }
 
 .btn:hover {

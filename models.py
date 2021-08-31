@@ -40,7 +40,7 @@ class Artist(db.Model):
     text = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    user = db.relationship('User', backref="messages")
+    # user = db.relationship('User', backref="messages")
 
 
 class User(db.Model):
