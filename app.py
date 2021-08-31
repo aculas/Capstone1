@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, redirect, session, g, flash
+from flask import Flask, render_template, request, redirect, session, g, abort, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
@@ -34,13 +34,13 @@ connect_db(app)
 def discover():
     """Discover new artists(searchbar)."""
     res = requests.get(
-        'https://api.unsplash.com/search/photos?query=green&client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
+        'https://api.unsplash.com/search/collections?query=forest&page=1&per_page=15&client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
 
     data = res.json()
 
     # alt_description: "green and yellow light illustration",
 
-    return render_template('discover.html', search_bar=data.get("results")[0].get("alt_description"))
+    return render_template('discover.html', search_bar=data.get("results")[0].get("title"))
 
 ##############################################################################
 # Artists page (page of all artists)
@@ -159,7 +159,7 @@ def list_users():
     Can take a 'q' param in querystring to search by that username.
     """
 
-    search = res.args.get('q')
+    search = request.args.get('q')
 
     if not search:
         users = User.query.all()
@@ -403,7 +403,7 @@ def homepage():
         return render_template('index.html', messages=messages, likes=liked_msg_ids, background=data.get("urls").get("full"))
 
     else:
-        return render_template('index.html', background=data.get("urls").get("full"))
+        return render_template('index.html', background=data.get("urls").get("full"), artist_name=data.get("user").get("name"))
 
 
 @app.errorhandler(404)
