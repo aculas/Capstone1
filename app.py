@@ -9,7 +9,6 @@ from forms import UserForm, UserAddForm, UserEditForm, LoginForm, ArtistForm, Me
 
 
 import requests
-import json
 
 CURR_USER_KEY = "curr_user"
 
@@ -54,7 +53,8 @@ def artists():
 
     data = res.json()
 
-    return render_template('artists.html', background=data.get("urls").get("full"), artist_name=data.get("user").get("name"), bio=data.get("bio"), portfolio=data.get("portfolio_url"))
+    return render_template('artists.html', background=data.get("user").get("profile_image").get("large"),
+                           artist_name=data.get("user").get("name"), location=data.get("location").get("country"), bio=data.get("bio"), portfolio=data.get("user").get("links").get("portfolio"))
 
 ##############################################################################
 # User signup/login/logout

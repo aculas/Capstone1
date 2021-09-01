@@ -26,12 +26,12 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           {% if session['user_id'] %}
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/messages">Messages</a>
           </li>
           <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/logout">Logout</a>
-          </li>
+          </li> -->
           {% else %}
           <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/">Home</a>
@@ -42,7 +42,7 @@
           <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/artists">Artists</a>
           </li>
-          <!-- This will be in version 2. <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/login">Login</a>
           </li>
           <li class="nav-item">
@@ -52,12 +52,11 @@
         </ul>
       </div>
     </nav>
-    {% endfor %} {% block content %} {% endblock %}
-    <!-- This will be in version 2 -->
-    <!-- <div class="container" style="margin-top: 2em">
+    <div class="container" style="margin-top: 2em">
       {% for category, msg in get_flashed_messages(with_categories=True) %}
       <div class="alert alert-{{category}}">{{ msg }}</div>
-    </div> -->
+      {% endfor %} {% block content %} {% endblock %}
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
