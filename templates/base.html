@@ -34,27 +34,30 @@
           </li>
           {% else %}
           <li class="nav-item">
+            <a class="nav-link pr-3 text-light" href="/">Home</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/discover">Discover</a>
           </li>
           <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/artists">Artists</a>
           </li>
-          <li class="nav-item">
+          <!-- This will be in version 2. <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/login">Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-light" href="/register">Sign up</a>
-          </li>
+          </li> -->
           {% endif %}
         </ul>
       </div>
     </nav>
-
-    <div class="container" style="margin-top: 2em">
+    {% endfor %} {% block content %} {% endblock %}
+    <!-- This will be in version 2 -->
+    <!-- <div class="container" style="margin-top: 2em">
       {% for category, msg in get_flashed_messages(with_categories=True) %}
       <div class="alert alert-{{category}}">{{ msg }}</div>
-      {% endfor %} {% block content %} {% endblock %}
-    </div>
+    </div> -->
     <script src="script.js"></script>
   </body>
 </html>

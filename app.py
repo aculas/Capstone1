@@ -48,11 +48,13 @@ def discover():
 
 @app.route('/artists', methods=["GET", "POST"])
 def artists():
-    """Artists Bio oage."""
+    """Artists Bio page."""
     res = requests.get(
-        'https://api.unsplash.com/users/:username/portfolio&client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
+        'https://api.unsplash.com/photos/random?client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
 
-    return render_template('artists.html')
+    data = res.json()
+
+    return render_template('artists.html', background=data.get("urls").get("full"), artist_name=data.get("user").get("name"), bio=data.get("bio"), portfolio=data.get("portfolio_url"))
 
 ##############################################################################
 # User signup/login/logout
