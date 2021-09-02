@@ -31,15 +31,17 @@ connect_db(app)
 
 @app.route('/discover', methods=["GET", "POST"])
 def discover():
+    search_term = request.args.get('q')
+
     """Discover new artists(searchbar)."""
-    res = requests.get(
-        'https://api.unsplash.com/search/collections?query=forest&page=1&per_page=15&client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
+    url = "https://api.unsplash.com/search/collections?query={}&page=1&per_page=15&client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU".format(
+        search_term)
+
+    res = requests.get(url)
 
     data = res.json()
 
-    # alt_description: "green and yellow light illustration",
-
-    return render_template('discover.html', search_bar=data.get("results")[0].get("title"))
+    return render_template('discover.html', search_bar=data['results'][0]['preview_photos'][0]['urls']['regular'])
 
 ##############################################################################
 # Artists page (page of all artists)
