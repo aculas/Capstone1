@@ -3,8 +3,8 @@
 <div class="discover">
   <h4 class="display-4">Who will you discover today? {{ request.status }}</h4>
   <p class="m-3">
-    You can search for an image by using the search box below or
-    <a href="/"><b>return to the homepage</b></a
+    You can search for an image by using the search box below or return to the
+    <a href="#" class="link-info"><b>homepage</b></a
     >.
   </p>
   <div class="row">
@@ -12,18 +12,20 @@
       <form class="form-inline" action="/discover">
         <input
           name="q"
-          class="form-control mb-0 mr-2"
+          class="form-control mb-0 mr-4"
           placeholder="Search Simply Art"
         />
         <button class="btn btn-outline-secondary">Search</button>
       </form>
     </div>
   </div>
-  <div class="imageContainer">
-    <a id="imageLink" href="#">
-      <img src= "{{search_bar}}" alt"" id="search_bar"/>
-    </a>
+  <div class="row">
+    <div class="col-sm-4">
+      <a id="imageLink" href="#">
+        <img src= "{{search_bar}}" alt"" id="search_bar"/>
+      </a>
+    </div>
   </div>
-
   {% endblock %}
 </div>
+<!-- need to make a divider class col-lg-3 col-md-4 col-xs-6 thumb -->

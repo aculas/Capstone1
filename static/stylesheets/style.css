@@ -10,10 +10,11 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif font-size 24px font-weight bold;
   text-align: center;
+  display: inline;
 }
 
 body {
-  background-color: #e6ecf0;
+  background-color: #ffffff;
 }
 
 body.error-404 {
@@ -35,17 +36,23 @@ body.error-404 {
 /* ======================= Nav */
 
 .navbar {
+  background-image: url("/static/images/nav-bg.png");
+  background-size: 100% 100%;
   background-color: #fff;
   height: 46px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
   margin-bottom: 1rem;
   position: relative;
   z-index: 9999;
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 8px 6px -6px #999;
+  /* the rest of your styling */
 }
 
 .navbar a {
-  color: #105583;
-  font-size: 13px;
+  color: #000000;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -171,6 +178,7 @@ nav + .container {
 #unsplashImage {
   max-height: 500px;
   border: 20px solid black;
+  position: relative;
   /* transform: rotate(3deg); */
 }
 

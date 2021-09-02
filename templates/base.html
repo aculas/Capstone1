@@ -26,29 +26,30 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           {% if session['user_id'] %}
-          <!-- <li class="nav-item">
-            <a class="nav-link pr-3 text-light" href="/messages">Messages</a>
+          <li class="nav-item">
+            <a class="nav-link pr-3 text-dark" href="/messages">Messages</a>
           </li>
           <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/logout">Logout</a>
-          </li> -->
+          </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link pr-3 text-light" href="/">Home</a>
+            <a class="nav-link pr-3 text-dark" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link pr-3 text-light" href="/discover">Discover</a>
+            <a class="nav-link pr-3 text-dark" href="/discover">Discover</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link pr-3 text-light" href="/artists">Artists</a>
-          </li>
-          <!-- <li class="nav-item">
+            <a class="nav-link pr-3 text-dark" href="/artists">Artists</a>
+            <!-- </li>
+          <li class="nav-item">
             <a class="nav-link pr-3 text-light" href="/login">Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-light" href="/register">Sign up</a>
           </li> -->
-          {% endif %}
+            {% endif %}
+          </li>
         </ul>
       </div>
     </nav>
