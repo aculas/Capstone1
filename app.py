@@ -44,6 +44,16 @@ def discover():
     return render_template('discover.html', search_bar=data['results'][0]['preview_photos'][0]['urls']['regular'])
 
 ##############################################################################
+# About Page
+
+
+@app.route('/about')
+def about():
+    """About Simply Art."""
+
+    return render_template('about.html')
+
+##############################################################################
 # Artists page (page of all artists)
 
 
@@ -56,7 +66,8 @@ def artists():
     data = res.json()
 
     return render_template('artists.html', background=data.get("user").get("profile_image").get("large"),
-                           artist_name=data.get("user").get("name"), location=data.get("location").get("country"), bio=data.get("bio"), portfolio=data.get("user").get("links").get("portfolio"))
+                           artist_name=data.get("user").get("name"), user_name=data.get("user").get("username"),
+                           location=data.get("location").get("country"), bio=data.get("bio"), portfolio=data.get("user").get("portfolio_url"), photos=data.get("user").get("links").get("photos"))
 
 ##############################################################################
 # User signup/login/logout
