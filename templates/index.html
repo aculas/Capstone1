@@ -1,11 +1,14 @@
 {% extends 'base.html' %} {% block content %}
-<h1>SIMPLY ART</h1>
-
-<div class="imageContainer">
+<div class="title">
+  <h1>SIMPLY ART</h1>
+</div>
+<div class="imageContainer2">
   <a id="imageLink" href="#">
     <img src= "{{background}}" alt"" id="unsplashImage"/>
   </a>
   <p class="imageDetails">Image by <a id="artist">{{artist_name}}</a></p>
-  <h3>Where everyone is an artist.</h3>
+  <div class="slogan">
+    <h3>Where everyone is an artist.</h3>
+  </div>
 </div>
 {% endblock %}
