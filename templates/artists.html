@@ -1,17 +1,19 @@
 {% extends 'base.html' %} {% block content %}
+<div class="title">
 <h1>Welcome to The Artist Page</h1>
+</div>
 <h4>
   No matter the style, or content there are different ways artist express
   themselves. <br> Check out some of our artists below.
 </h4>
 <br />
 <br />
-<div class="imageContainer">
+<div class="imageContainer3">
   <a id="imageLink" href="#">
     <img src= "{{background}}" alt"" id="unsplashImage"/>
   </a>
   <p class="imageDetails">
-    <div>
+    <div class="artistDetails">
     Artist: <a id="artist">{{artist_name}}</a> <br>
     Username: <a id="username">{{user_name}}</a> <br>
     Bio: <a id="bio">{{bio}}</a> <br>

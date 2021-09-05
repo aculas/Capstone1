@@ -67,7 +67,8 @@ def artists():
 
     return render_template('artists.html', background=data.get("user").get("profile_image").get("large"),
                            artist_name=data.get("user").get("name"), user_name=data.get("user").get("username"),
-                           location=data.get("location").get("country"), bio=data.get("bio"), portfolio=data.get("user").get("portfolio_url"), photos=data.get("user").get("links").get("photos"))
+                           location=data.get("location").get("country"), bio=data.get("bio"),
+                           portfolio=data.get("user").get("portfolio_url"), photos=data.get("user").get("links").get("photos"))
 
 ##############################################################################
 # User signup/login/logout
@@ -403,6 +404,8 @@ def homepage():
 
     data = res.json()
 
+    baseUrl = "https://www.unsplash.com"
+
     if g.user:
         following_ids = [f.id for f in g.user.following] + [g.user.id]
 
@@ -418,7 +421,7 @@ def homepage():
         return render_template('index.html', messages=messages, likes=liked_msg_ids, background=data.get("urls").get("full"))
 
     else:
-        return render_template('index.html', background=data.get("urls").get("full"), artist_name=data.get("user").get("name"))
+        return render_template('index.html', background=data.get("urls").get("full"), artist_name=data.get("user").get("name"), baseUrl=baseUrl)
 
 
 @app.errorhandler(404)

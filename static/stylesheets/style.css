@@ -13,10 +13,10 @@
   display: inline;
 }
 
-.imageDetails {
+/* .imageDetails {
   text-align: center;
   margin: auto;
-}
+} */
 
 .slogan {
   text-align: center;
@@ -26,6 +26,13 @@
 
 .slogan h3 {
   font-size: 42px;
+  text-align: center;
+}
+
+.imageContainer2 {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* ===============================Main page image */
@@ -75,7 +82,47 @@
   width: 50%;
 }
 
-/* ====================== Discover */
+/* ====================== discover */
+
+.discover {
+  text-align: center;
+  font-family: Copperplate;
+}
+
+.row {
+  display: block;
+  margin-left: auto;
+}
+
+/* ====================== artists */
+
+h4 {
+  margin-left: 60px;
+  font-family: Copperplate;
+}
+
+.imageContainer3 {
+  display: block;
+  margin-left: 80px;
+  margin-bottom: 50px;
+  width: 50%;
+}
+
+.imageDetails {
+  text-align: center;
+  /* margin: auto; */
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 50px;
+  width: 50%;
+}
+
+.artistDetails {
+  margin: auto;
+  display: block;
+  margin-bottom: 10px;
+  width: 50%;
+}
 
 /* ====================== General */
 
