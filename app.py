@@ -21,6 +21,7 @@ app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = "abc123"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 toolbar = DebugToolbarExtension(app)
+UNSPLASH_API_KEY = os.environ.get("UNSPLASH_API_KEY")
 
 
 connect_db(app)
