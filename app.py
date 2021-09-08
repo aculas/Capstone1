@@ -1,12 +1,13 @@
+import os
 import requests
+
 from forms import UserForm, UserAddForm, UserEditForm, LoginForm, ArtistForm, MessageForm
 from models import connect_db, db, User, Message, Artist
 from sqlalchemy.exc import IntegrityError
 from flask_debugtoolbar import DebugToolbarExtension
 from flask import Flask, render_template, request, redirect, session, g, abort, flash
-import os
-from dotenv import load_dotenv
 
+from dotenv import load_dotenv
 load_dotenv()
 api_key = os.environ.get("api_key")
 
@@ -35,7 +36,7 @@ def discover():
     search_term = request.args.get('q')
 
     """Discover new artists(searchbar)."""
-    url = f"https://api.unsplash.com/search/collections?query=&page=1&per_page=15&client_id={api_key}".format(
+    url = f"https://api.unsplash.com/search/collections?query={{}}&page=1&per_page=15&client_id={api_key}".format(
         search_term)
 
     res = requests.get(url)
