@@ -1,14 +1,15 @@
-import os
-
-from flask import Flask, render_template, request, redirect, session, g, abort, flash
-from flask_debugtoolbar import DebugToolbarExtension
-from sqlalchemy.exc import IntegrityError
-
-from models import connect_db, db, User, Message, Artist
-from forms import UserForm, UserAddForm, UserEditForm, LoginForm, ArtistForm, MessageForm
-
-
 import requests
+from forms import UserForm, UserAddForm, UserEditForm, LoginForm, ArtistForm, MessageForm
+from models import connect_db, db, User, Message, Artist
+from sqlalchemy.exc import IntegrityError
+from flask_debugtoolbar import DebugToolbarExtension
+from flask import Flask, render_template, request, redirect, session, g, abort, flash
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.environ.get("api_key")
+
 
 CURR_USER_KEY = "curr_user"
 
@@ -21,7 +22,6 @@ app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = "abc123"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 toolbar = DebugToolbarExtension(app)
-UNSPLASH_API_KEY = os.environ.get("UNSPLASH_API_KEY")
 
 
 connect_db(app)
@@ -35,7 +35,7 @@ def discover():
     search_term = request.args.get('q')
 
     """Discover new artists(searchbar)."""
-    url = "https://api.unsplash.com/search/collections?query={}&page=1&per_page=15&client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU".format(
+    url = f"https://api.unsplash.com/search/collections?query=&page=1&per_page=15&client_id={api_key}".format(
         search_term)
 
     res = requests.get(url)
@@ -62,7 +62,7 @@ def about():
 def artists():
     """Artists Bio page."""
     res = requests.get(
-        'https://api.unsplash.com/photos/random?client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
+        f"https://api.unsplash.com/photos/random?client_id={api_key}")
 
     data = res.json()
 
@@ -394,18 +394,11 @@ def messages_destroy(message_id):
 @app.route('/')
 def homepage():
     """Show homepage:
-
-    - anon users: no messages
-    - logged in: 100 most recent messages of followed_users
     """
     res = requests.get(
-        'https://api.unsplash.com/photos/random?client_id=sjb8Hy9YhaHInjGNWAwQM9DMQdh4niqP7hiHnTlpGkU')
-
-    # res = json.loads(res.text)
+        f"https://api.unsplash.com/photos/random?client_id={api_key}")
 
     data = res.json()
-
-    baseUrl = "https://www.unsplash.com"
 
     if g.user:
         following_ids = [f.id for f in g.user.following] + [g.user.id]
@@ -422,7 +415,7 @@ def homepage():
         return render_template('index.html', messages=messages, likes=liked_msg_ids, background=data.get("urls").get("full"))
 
     else:
-        return render_template('index.html', background=data.get("urls").get("full"), artist_name=data.get("user").get("name"), baseUrl=baseUrl)
+        return render_template('index.html', background=data.get("urls").get("full"), artist_name=data.get("user").get("name"))
 
 
 @app.errorhandler(404)
